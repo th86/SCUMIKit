@@ -14,7 +14,7 @@ HOMER_PATH=/homer/path
 CTK_PATH=/CTK/path
 
 WORKING_PATH=/working/path
-SRA_FILES=/working/path/*
+SRA_FILES=/working/path/*.sra
 
 ## CONFIGURATIONS ##
 #Options of reference genome: ERCC92, GRCh38, GRCm38

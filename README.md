@@ -2,22 +2,17 @@
 A pipeline for processing UMI-tagged single cell RNA-Seq data
 
 ## Prerequisites
-Exact UMI collapsing: SRAToolkit, SAMTools, BEDTools, UMItools, Bowtie or BWA
+Exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)
 
-UMI sequencing error correction: CTK, CZPlib
+UMI sequencing error correction: [CTK](http://zhanglab.c2b2.columbia.edu/index.php/CTK_Documentation), [CZPlib](http://sourceforge.net/projects/czplib/)
 
 ## Usage
 
-Install the prerequisite programs and set up the paths in SCUMI_Exact.sh or SCUMI_CTK.sh. 
+Install the prerequisite programs and set up the paths in SCUMI.sh  
 Then simply run 
 
 ```r
-sh ./SCUMI_Exact.sh
-```
-Or 
-
-```r
-sh ./SCUMI_CTK.sh
+sh ./SCUMI.sh
 ```
 
 ## Reference Transcriptomes

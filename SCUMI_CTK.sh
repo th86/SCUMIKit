@@ -1,5 +1,5 @@
 #!/bin/sh
-#The Vanilla (Exact UMI Collapsing) SCUMI Pipeline
+#The CTK Sequence Correcting SCUMI Pipeline
 #Taihsien Ouyang, Yixuan Guo, Darwin Shen, Ranran Hu
 
 ## Prerequisites ##
@@ -43,7 +43,7 @@ do
   	$HOMER_PATH//bin/homerTools trim -5 GGG -mis 0 $f.umi 	#Remark this line if there is no template switching
 	
 	echo "Aligning $f"
-	$ALIGNER_PATH//bowtie -p $NUM_CORES --best --sam $REF_GENOME $f.umi.trimmed > $f.sam
+	$BOWTIE_PATH//bowtie -p $NUM_CORES --best --sam $REF_GENOME $f.umi.trimmed > $f.sam
 
  	echo "Converting $f to CTK-BED"
  	samtools view -Sb $f.sam > $f.bam

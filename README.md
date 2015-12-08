@@ -3,6 +3,7 @@ A pipeline for processing UMI-tagged single cell RNA-Seq data
 
 ## Prerequisites
 Exact UMI collapsing: SRAToolkit, SAMTools, BEDTools, UMItools, Bowtie or BWA
+
 UMI sequencing error correction: CTK
 
 ## Usage

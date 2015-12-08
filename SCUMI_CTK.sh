@@ -3,7 +3,7 @@
 #Taihsien Ouyang, Yixuan Guo, Darwin Shen, Ranran Hu
 
 ## Prerequisites ##
-#SRAToolkit, SAMTools, BEDTools, UMItools
+#SRAToolkit, SAMTools, BEDTools, UMItools, CTK
 #Aligner is Bowtie or BWA
 
 ## PATHS ##
@@ -11,13 +11,14 @@
 ALIGNER_PATH=/bowtie/path
 SRATOOLKIT_PATH=/sratoolkit/path
 HOMER_PATH=/homer/path
+CTK_PATH=/CTK/path
 
 WORKING_PATH=/working/path
 SRA_FILES=/working/path/*
 
 ## CONFIGURATIONS ##
 #Options of reference genome: ERCC92, GRCh38, GRCm38
-REF_GENOME=GRCm38
+REF_GENOME=GRCm38 	
 #Number of cores to be used for alignment
 NUM_CORES=12
 
@@ -28,6 +29,7 @@ mkdir $WORKING_PATH//umi
 mkdir $WORKING_PATH//umitrimmed
 mkdir $WORKING_PATH//bam
 mkdir $WORKING_PATH//bed
+mkdir $WORKING_PATH//ctk
 
 ## MAIN PROCESS ##
 
@@ -40,14 +42,17 @@ do
 	
 	echo "Aligning $f"
 	$ALIGNER_PATH//bowtie -p $NUM_CORES --best --sam $REF_GENOME $f.umi.trimmed > $f.sam
- 
- 	echo "Converting $f to BED"
+
+ 	echo "Converting $f to CTK-BED"
  	samtools view -Sb $f.sam > $f.bam
 	samtools view -bq 1 $f.bam > $f.bam2
 	samtools sort $f.bam2 $f.bam.sorted
 	samtools index $f.bam.sorted.bam
-	umitools rmdup $f.bam.sorted.bam $f.bamrm > $f.bed	#Naive UMI Collapsing
+	bamToBed -i $f.bam.sorted.bam > $f.bed 
+	sed -i 's/:UMI_/#1#/g' $f.bed #Converting the format of read tag for CTK
+	perl $CTK_PATH//tag2collapse.pl $f.bed $f.bed.ctk
 	echo "Done with $f"
+
 done
 
 mv $WORKING_PATH//*.fastq $WORKING_PATH//fastq
@@ -59,5 +64,6 @@ mv $WORKING_PATH//*.bam2 $WORKING_PATH//bam
 mv $WORKING_PATH//*.umi.trimmed $WORKING_PATH//umitrimmed
 mv $WORKING_PATH//*.lengths $WORKING_PATH//umitrimmed
 mv $WORKING_PATH//*.bed $WORKING_PATH//bed
+mv $WORKING_PATH//*.bed.ctk $WORKING_PATH//ctk
 
 echo "==DONE=="

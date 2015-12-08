@@ -13,3 +13,7 @@ Then simply run
 ```r
 sh ./SCUMI_Exact.sh
 ```
+
+## Reference Transcriptomes
+
+The reference transcriptomes can be downloaded from [Ensembl](http://www.ensembl.org/info/data/ftp/index.html).

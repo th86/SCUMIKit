@@ -18,3 +18,11 @@ sh ./SCUMI.sh
 ## Reference Transcriptomes
 
 The reference transcriptomes can be downloaded from [Ensembl](http://www.ensembl.org/info/data/ftp/index.html).
+
+## References
+
+Zhang, C., Darnell, R.B. 2011. Mapping in vivo protein-RNA interactions at single-nucleotide resolution from HITS-CLIP data. Nat. Biotech. 29:607-614. 
+
+## Acknowledgements
+
+We are grateful for the advice and help of Professor Chaolin Zhang, Professor Peter Sims, and Professor Yufeng Shen during the development of this toolkit as our final project of BINFG4017 DEEP SEQUENCING at Columbia University.

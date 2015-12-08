@@ -3,8 +3,8 @@
 #Taihsien Ouyang, Yixuan Guo, Darwin Shen, Ranran Hu
 
 ## Prerequisites ##
-#SRAToolkit, SAMTools, BEDTools, UMItools
-#Aligner is Bowtie or BWA
+#SRAToolkit, SAMTools, BEDTools, umitools, R
+#Aligner can be Bowtie or BWA
 
 ## PATHS ##
 

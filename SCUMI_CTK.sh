@@ -3,8 +3,8 @@
 #Taihsien Ouyang, Yixuan Guo, Darwin Shen, Ranran Hu
 
 ## Prerequisites ##
-#SRAToolkit, SAMTools, BEDTools, UMItools, CTK
-#Aligner is Bowtie or BWA
+#SRAToolkit, SAMTools, BEDTools, umitools, CTK, CZPlib, R
+#Aligner can be Bowtie or BWA
 
 ## PATHS ##
 
@@ -24,6 +24,8 @@ NUM_CORES=12
 
 ## INITIALIZATION ##
 
+PERL5LIB=/usr/local/lib/czplib.v1.0.6/
+
 mkdir $WORKING_PATH//fastq
 mkdir $WORKING_PATH//umi
 mkdir $WORKING_PATH//umitrimmed
@@ -37,8 +39,8 @@ for f in $SRA_FILES
 do
 	echo "Trimming $f"
 	$SRATOOLKIT_PATH//bin/fastq-dump -Z $f > $f.fastq
-  	umitools trim --end 5 $f.fastq NNNNN > $f.umi #Change the number of Ns to specify the length of UMI barcodes
-  	$HOMER_PATH//bin/homerTools trim -5 GGG -mis 0 $f.umi #Remark this line if there is no template switching
+  	umitools trim --end 5 $f.fastq NNNNN > $f.umi 			#Change the number of Ns to specify the length of UMI barcodes
+  	$HOMER_PATH//bin/homerTools trim -5 GGG -mis 0 $f.umi 	#Remark this line if there is no template switching
 	
 	echo "Aligning $f"
 	$ALIGNER_PATH//bowtie -p $NUM_CORES --best --sam $REF_GENOME $f.umi.trimmed > $f.sam
@@ -49,7 +51,7 @@ do
 	samtools sort $f.bam2 $f.bam.sorted
 	samtools index $f.bam.sorted.bam
 	bamToBed -i $f.bam.sorted.bam > $f.bed 
-	sed -i 's/:UMI_/#1#/g' $f.bed #Converting the format of read tag for CTK
+	sed -i 's/:UMI_/#1#/g' $f.bed 							#Converting the format of read tag for CTK
 	perl $CTK_PATH//tag2collapse.pl $f.bed $f.bed.ctk
 	echo "Done with $f"
 

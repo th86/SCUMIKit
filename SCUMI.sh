@@ -26,6 +26,8 @@ REF_GENOME_PATH=/ref_genome/path/GRCm38.fa
 NUM_CORES=12
 #Use BWA to align the reads?
 USE_BWA=YES
+#Use Homer to remove the template switching Gs?
+USE_HOMER=YES
 #Use CTK to correct the sequencing error in UMI tags?
 USE_CTK=YES
 
@@ -48,8 +50,14 @@ do
 	echo "Trimming $f"
 	$SRATOOLKIT_PATH//bin/fastq-dump -Z $f > $f.fastq
   	umitools trim --end 5 $f.fastq NNNNN > $f.umi 			#Change the number of Ns to specify the length of UMI barcodes
-  	$HOMER_PATH//bin/homerTools trim -5 GGG -mis 0 $f.umi 	#Remark this line if there is no template switching
-	
+	if [[ $USE_HOMER == "YES" ]]
+	then
+		echo "Trimming template switching Gs"
+  		$HOMER_PATH//bin/homerTools trim -5 GGG -mis 0 $f.umi 	#Remark this line if there is no template switching
+  	else
+  		echo "No template switching"
+	fi
+
 	echo "Aligning $f"
 	if [[ $USE_BWA == "YES" ]]
 	then

@@ -2,13 +2,13 @@
 A pipeline for processing UMI-tagged single cell RNA-Seq data
 
 ## Prerequisites
-Read alignment and Exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [HomerTools](http://homer.salk.edu/homer/ngs/homerTools.html) ,[BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)
+Read alignment and exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [HomerTools](http://homer.salk.edu/homer/ngs/homerTools.html) ,[BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)
 
 UMI sequencing error correction: [CTK](http://zhanglab.c2b2.columbia.edu/index.php/CTK_Documentation), [CZPlib](http://sourceforge.net/projects/czplib/)
 
-Matrix Imputation: [impute](www.bioconductor.org/packages/release/bioc/html/impute.html)
+Matrix imputation: [impute](www.bioconductor.org/packages/release/bioc/html/impute.html)
 
-Multicore Computation: [doMC](https://cran.r-project.org/web/packages/doMC/index.html) and [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html)
+Multicore computing: [doMC](https://cran.r-project.org/web/packages/doMC/index.html) and [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html)
 
 ## Usage
 
@@ -19,10 +19,16 @@ Then simply run
 sh ./SCUMI.sh
 ```
 
-A directory with resulting BED files will be created in the designated directory. Run the following command to create the count matrix from the file using multiple processors. The values after the R script is the number of cores.
+A directory with resulting BED files will be created in the designated directory. Please run the following command to create the count matrix from the file using multiple processors. The values after the R script is the number of cores. The output is an R object file (count_matrix.rda) and a CSV (count_matrix.csv) of the count matrix.
 
 ```r
 Rscript /path/to/BEDcounter.R 12
+```
+
+To correct the count matrix using the k-NN-based single cell expression noise model, please run the follows. The output is an R object file (count_matrix_imputed.rda).
+
+```r
+Rscript /path/to/NoiseCorrection.R count_matrix.rda
 ```
 
 ## Reference Transcriptomes
@@ -30,6 +36,10 @@ Rscript /path/to/BEDcounter.R 12
 The reference transcriptomes can be downloaded from [Ensembl](http://www.ensembl.org/info/data/ftp/index.html).
 
 ## References
+
+Bose, S., Wan Z., Carr A., Rizvi, A.H. et al. Scalable microfluidics for single-cell RNA printing and sequencing. Genome Biol. 16:120.
+
+Islam, S., Zeisel, A., Joost, S., La Manno G. et. al. Quantitative single-cell RNA-seq with unique molecular identifiers. Nat. Methods 11:163-166.
 
 Zhang, C., Darnell, R.B. 2011. Mapping in vivo protein-RNA interactions at single-nucleotide resolution from HITS-CLIP data. Nat. Biotech. 29:607-614. 
 

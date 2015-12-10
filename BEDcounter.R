@@ -1,6 +1,6 @@
 #Multi-Cored Counter and Aggregator of the Mapped Reads in BED files
 #Taihsien Ouyang
-#2015 Nov 9
+#2015 Dec. 9
 
 library("doMC")
 
@@ -22,6 +22,7 @@ registerDoMC(NUM_CORE)
 fileNames=dir()
 
 ## Create the annotation vector ##
+
 annot=NULL
 for(i in 1:length(fileNames)){
 		cat("Scanning file", i,"...\n" )
@@ -64,7 +65,8 @@ for(i in 1:length(geList)){
 	ge[,i]<-geList[[i]]
 }
 
-cat("Writing outputs\m")
+cat("Writing outputs\n")
 save(ge, file="count_matrix.rda")
 write.table(ge, file="count_matrix.csv",sep=",")
-cat("Done\n")
+
+cat("== Done ==\n")

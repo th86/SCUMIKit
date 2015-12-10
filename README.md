@@ -2,9 +2,13 @@
 A pipeline for processing UMI-tagged single cell RNA-Seq data
 
 ## Prerequisites
-Exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [HomerTools](http://homer.salk.edu/homer/ngs/homerTools.html) ,[BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)
+Read alignment and Exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [HomerTools](http://homer.salk.edu/homer/ngs/homerTools.html) ,[BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)
 
 UMI sequencing error correction: [CTK](http://zhanglab.c2b2.columbia.edu/index.php/CTK_Documentation), [CZPlib](http://sourceforge.net/projects/czplib/)
+
+Matrix Imputation: [impute](www.bioconductor.org/packages/release/bioc/html/impute.html)
+
+Multicore Computation: [doMC](https://cran.r-project.org/web/packages/doMC/index.html) and [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html)
 
 ## Usage
 
@@ -13,6 +17,12 @@ Then simply run
 
 ```r
 sh ./SCUMI.sh
+```
+
+A directory with resulting BED files will be created in the designated directory. Run the following command to create the count matrix from the file using multiple processors. The values after the R script is the number of cores.
+
+```r
+Rscript /path/to/BEDcounter.R 12
 ```
 
 ## Reference Transcriptomes

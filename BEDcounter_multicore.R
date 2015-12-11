@@ -1,4 +1,4 @@
-#Multi-Cored Counter and Aggregator of the Mapped Reads in BED files
+#Read Copy Counter and Aggregator of the Mapped Reads in BED files
 #Taihsien Ouyang
 #2015 Dec. 9
 

@@ -19,7 +19,13 @@ Then simply run
 sh ./SCUMI.sh
 ```
 
-A directory with resulting BED files will be created in the designated directory. Please run the following command to create the count matrix from the file using multiple processors. The values after the R script is the number of cores. The output is an R object file (count_matrix.rda) and a CSV (count_matrix.csv) of the count matrix.
+A directory with resulting BED files will be created in the designated directory. Please run the following command to create the count matrix from the UMI-collapsed BED file in the directory. The output is an R object file (count_matrix.rda) and a CSV (count_matrix.csv) of the count matrix.
+
+```r
+Rscript /path/to/BEDcounter_collapsed.R
+```
+
+If you want to collapse the file using multiple processors without CTK or UMItools. Please use the following command. The values after the R script is the number of cores.
 
 ```r
 Rscript /path/to/BEDcounter.R 12

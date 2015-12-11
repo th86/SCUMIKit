@@ -1,5 +1,7 @@
 # SCUMIKit
-A pipeline for processing UMI-tagged single cell RNA-Seq data
+A streamlined pipeline for processing UMI-tagged single cell RNA-Seq data. The pipeline does the following workflow in three simple commands.
+
+![alt tag](https://raw.githubusercontent.com/th86/SCUMIKit/master/doc/SCUMIpipeline.png)
 
 ## Prerequisites
 Read alignment and exact UMI collapsing: [SRAToolkit](https://github.com/ncbi/sra-tools), [SAMtools](http://samtools.sourceforge.net/), [HomerTools](http://homer.salk.edu/homer/ngs/homerTools.html) ,[BEDtools](http://bedtools.readthedocs.org/en/latest/), [UMItools](https://github.com/brwnj/umitools/), [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml) and [BWA](http://bio-bwa.sourceforge.net/)

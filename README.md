@@ -12,6 +12,19 @@ Matrix imputation: [impute](www.bioconductor.org/packages/release/bioc/html/impu
 
 Multicore computing: [doMC](https://cran.r-project.org/web/packages/doMC/index.html) and [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html)
 
+
+Before running the pipeline, we need to prepare the index for the aligners.
+
+For BWA, run the following command:
+```r
+bwa index -a bwtsw Mus_musculus.GRCm38.cdna.all.fa
+```
+
+For Bowtie:
+```r
+bowtie-build Mus_musculus.GRCm38.cdna.all.fa GRCm38
+```
+
 ## Usage
 
 Install the prerequisite programs and set up the paths in SCUMI.sh  
